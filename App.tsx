@@ -4,7 +4,6 @@ import { Projects } from './components/Projects';
 import { Services } from './components/Services';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
 import { Project } from './types';
 import { PROJECTS } from './constants';
 import { ProjectModal } from './components/ProjectModal';
@@ -81,8 +80,6 @@ const App: React.FC = () => {
           </main>
         </motion.div>
       </div>
-
-      <Footer />
       
       <AnimatePresence>
         {selectedProject && (

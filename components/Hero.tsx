@@ -2,6 +2,12 @@ import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { NAV_LINKS, SOCIAL_LINKS } from '../constants';
 
+const Logo: React.FC = () => (
+    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-900" aria-label="Aftab Uddin Logo">
+        <path d="M25 75V25H45L65 50V25H75V75H55L35 50V75H25Z" fill="currentColor" />
+    </svg>
+);
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -32,6 +38,17 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ activeSection }) => {
   return (
     <section id="home" className="relative h-full flex flex-col justify-center py-20 lg:py-0">
+      <motion.div
+        className="absolute top-8 left-0 lg:top-12"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
+      >
+        <a href="#home" aria-label="Homepage" data-cursor-hover>
+          <Logo />
+        </a>
+      </motion.div>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
