@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aftab Uddin | Web Developer & SOC Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              accent: {
+                DEFAULT: '#1f2937', // gray-800
+                light: '#374151',   // gray-700
+                dark: '#111827',    // gray-900
+              },
+              'off-white': '#F8F7F4',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body.gradient-bg {
+        background: linear-gradient(-45deg, #a8e6cf, #dcedc1, #ffd3b6, #ffaaa5);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        position: relative;
+      }
+
+      body.gradient-bg::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(248, 247, 244, 0.9);
+        z-index: -1;
+        transition: background-color 0.3s ease;
+      }
+
+      @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      /* Hide default cursor */
+      body, a, button {
+        cursor: none;
+      }
+      .cursor-pointer {
+         cursor: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.18"
+  }
+}
+</script>
+</head>
+  <body class="gradient-bg bg-transparent text-gray-800 font-sans antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
