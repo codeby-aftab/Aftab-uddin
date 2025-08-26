@@ -10,7 +10,7 @@ interface ProjectCardProps {
 }
 
 // FIX: Add Variants type to ensure correct type inference for animation properties.
-const cardVariants: Variants = {
+export const cardVariants: Variants = {
     offscreen: { y: 50, opacity: 0 },
     onscreen: {
         y: 0,

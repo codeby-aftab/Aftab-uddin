@@ -53,7 +53,7 @@ export const CustomCursor: React.FC = () => {
         },
         hover: {
             scale: 2.5,
-            backgroundColor: "rgba(248, 247, 244, 1)",
+            backgroundColor: "rgba(31, 41, 55, 0.2)",
             borderColor: "rgba(31, 41, 55, 0.0)",
         },
         text: {

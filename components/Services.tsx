@@ -23,7 +23,7 @@ export const Services: React.FC = () => {
   return (
     <motion.section
       id="services"
-      className="py-20"
+      className="py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Hero } from './components/Hero';
 import { Projects } from './components/Projects';
 import { Services } from './components/Services';
@@ -14,8 +14,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 const App: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeSection, setActiveSection] = useState<string>('projects');
+  const mainRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    const mainEl = mainRef.current;
+    // On smaller screens, mainEl won't exist for the observer, so we fall back to document
+    const scrollRoot = mainEl || document.body;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -24,15 +29,19 @@ const App: React.FC = () => {
           }
         });
       },
-      { rootMargin: '-30% 0px -70% 0px' }
+      { 
+        root: mainEl, // will be null on mobile, which is correct
+        threshold: 0.5 
+      }
     );
     
-    document.querySelectorAll('main section').forEach(section => {
+    const sections = (mainEl || document).querySelectorAll('main section');
+    sections.forEach(section => {
       observer.observe(section);
     });
     
     return () => {
-        document.querySelectorAll('main section').forEach(section => {
+        sections.forEach(section => {
             observer.unobserve(section);
         });
     };
@@ -64,7 +73,7 @@ const App: React.FC = () => {
           </aside>
 
           {/* Right Scrollable Column */}
-          <main className="lg:col-span-8">
+          <main ref={mainRef} className="lg:col-span-8 lg:h-screen lg:overflow-y-scroll lg:snap-y lg:snap-mandatory no-scrollbar">
             <Projects projects={PROJECTS} onProjectSelect={handleProjectSelect} />
             <Services />
             <About />

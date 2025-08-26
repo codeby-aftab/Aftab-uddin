@@ -38,7 +38,7 @@ export const About: React.FC = () => {
   return (
     <motion.section
       id="about"
-      className="py-20"
+      className="py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"

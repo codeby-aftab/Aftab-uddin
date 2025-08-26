@@ -84,20 +84,6 @@ export const PROJECTS: Project[] = [
       ],
     },
   },
-  {
-    id: 6,
-    title: 'Trina\'s Variety Shop',
-    category: 'E-commerce',
-    imageUrl: 'https://picsum.photos/seed/trinas-shop/800/600',
-    details: {
-      description: 'A fully functional e-commerce platform for a variety shop, complete with product catalogs, shopping cart, and secure checkout functionalities, built on WordPress.',
-      role: 'WordPress Developer',
-      technologies: ['WordPress', 'WooCommerce', 'MySQL', 'Stripe/PayPal Integration'],
-      images: [
-        'https://picsum.photos/seed/trinas-d1/1200/800',
-      ],
-    },
-  },
 ];
 
 export const SERVICES = [
