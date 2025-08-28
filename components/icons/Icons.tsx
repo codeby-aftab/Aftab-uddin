@@ -174,8 +174,12 @@ export const YouTubeIcon: React.FC = () => (
     <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.78 22 12 22 12s0 3.22-.418 4.814a2.504 2.504 0 01-1.768 1.768C18.219 19 12 19 12 19s-6.219 0-7.812-1.418a2.504 2.504 0 01-1.768-1.768C2 15.22 2 12 2 12s0-3.22.418-4.814a2.504 2.504 0 011.768-1.768C5.781 5 12 5 12 5s6.219 0 7.812.418zM9.545 15.568V8.432L15.568 12 9.545 15.568z" clipRule="evenodd" /></svg>
 );
 
-export const Logo: React.FC = () => (
-    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-900" aria-label="AJ Logo">
+interface LogoProps {
+  className?: string;
+}
+
+export const Logo: React.FC<LogoProps> = ({ className }) => (
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className || "w-12 h-12 text-gray-900"} aria-label="AJ Logo">
         <path d="M22 75L40 25L58 75H48L40 50L32 75H22Z M62 75V25H82V35H72V65C72 75 65 75 62 70V75Z" fill="currentColor" />
     </svg>
 );

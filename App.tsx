@@ -10,16 +10,32 @@ import { Project } from './types';
 import { PROJECTS, ALL_PROJECTS } from './constants';
 import { ProjectModal } from './components/ProjectModal';
 import { CustomCursor } from './components/CustomCursor';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { AllProjectsModal } from './components/AllProjectsModal';
 import { MenuOverlay } from './components/MenuOverlay';
+import { Preloader } from './components/Preloader';
 
 const App: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isAllProjectsOpen, setIsAllProjectsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const mainRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    // This effect runs only once on mount for the preloader
+    document.body.style.overflow = 'hidden';
+    
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      // At this point, no modals can be open, so it's safe to restore scroll.
+      // The other modal handlers will correctly set overflow to hidden when they open.
+      document.body.style.overflow = 'auto';
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const mainEl = mainRef.current;
@@ -121,28 +137,32 @@ const App: React.FC = () => {
   return (
     <>
       <CustomCursor />
-      <div className="px-4 sm:px-8 md:px-12 lg:px-16">
-        <motion.div 
-          className="lg:grid lg:grid-cols-12 lg:gap-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-        >
-          {/* Left Sticky Column */}
-          <aside className="lg:col-span-3 lg:sticky lg:top-0 lg:h-screen">
-            <Hero activeSection={activeSection} onNavClick={handleNavClick} onLogoClick={openMenu} />
-          </aside>
+      
+      <AnimatePresence>
+        {isLoading && <Preloader />}
+      </AnimatePresence>
 
-          {/* Right Scrollable Column */}
-          <main ref={mainRef} className="lg:col-span-9 lg:h-screen lg:overflow-y-scroll lg:snap-y lg:snap-mandatory no-scrollbar">
-            <Home />
-            <Projects projects={PROJECTS} onProjectSelect={handleProjectSelect} onOpenAllProjects={handleOpenAllProjects} />
-            <Services />
-            <About />
-            <Experience />
-            <Contact />
-          </main>
-        </motion.div>
+      <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        <div className="px-4 sm:px-8 md:px-12 lg:px-16">
+          <div 
+            className="lg:grid lg:grid-cols-12 lg:gap-12"
+          >
+            {/* Left Sticky Column */}
+            <aside className="lg:col-span-3 lg:sticky lg:top-0 lg:h-screen">
+              <Hero activeSection={activeSection} onNavClick={handleNavClick} onLogoClick={openMenu} />
+            </aside>
+
+            {/* Right Scrollable Column */}
+            <main ref={mainRef} className="lg:col-span-9 lg:h-screen lg:overflow-y-scroll lg:snap-y lg:snap-mandatory no-scrollbar">
+              <Home />
+              <Projects projects={PROJECTS} onProjectSelect={handleProjectSelect} onOpenAllProjects={handleOpenAllProjects} />
+              <Services />
+              <About />
+              <Experience />
+              <Contact />
+            </main>
+          </div>
+        </div>
       </div>
       
       <AnimatePresence>
