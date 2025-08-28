@@ -6,9 +6,11 @@ export interface Project {
   imageUrl: string;
   details: {
     description: string;
+    detailedDescription: string;
     role: string;
     technologies: string[];
     images: string[];
+    liveUrl?: string;
   };
 }
 

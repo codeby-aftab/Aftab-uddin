@@ -49,17 +49,22 @@ export const About: React.FC = () => {
               className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 text-center"
               variants={gridContainerVariants}
             >
-              {SKILLS.map((skill) => (
-                <motion.div
-                  key={skill.name}
-                  variants={itemVariants}
-                  className="group flex flex-col items-center justify-center p-4 bg-gray-100/80 rounded-lg transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1"
-                  title={skill.name}
-                >
-                  <skill.icon />
-                  <span className="mt-2 text-xs sm:text-sm font-medium text-gray-700">{skill.name}</span>
-                </motion.div>
-              ))}
+              {SKILLS.map((skill) => {
+                const hoverTextClass = (skill as any).hoverTextColor || 'group-hover:text-white';
+                return (
+                  <motion.div
+                    key={skill.name}
+                    variants={itemVariants}
+                    className={`group flex flex-col items-center justify-center p-4 bg-gray-100/80 rounded-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${skill.color}`}
+                    title={skill.name}
+                  >
+                    <div className={`transition-colors duration-300 text-gray-800 ${hoverTextClass}`}>
+                      <skill.icon />
+                    </div>
+                    <span className={`mt-2 text-xs sm:text-sm font-medium text-gray-700 ${hoverTextClass}`}>{skill.name}</span>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </motion.div>
           <motion.a

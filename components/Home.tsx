@@ -55,19 +55,10 @@ export const Home: React.FC = () => {
         </motion.h1>
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl"
+          className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl"
         >
           I build and secure intuitive, high-performance web applications. From MERN stack development to custom WordPress solutions, I focus on creating seamless user journeys and robust digital platforms.
         </motion.p>
-        <motion.div variants={itemVariants}>
-          <button
-            onClick={handleScrollToProjects}
-            data-cursor-hover
-            className="inline-flex items-center gap-2 bg-accent text-white font-semibold py-3 px-6 rounded-lg hover:bg-accent-light transition-all shadow-lg transform hover:scale-105"
-          >
-            <span>View My Work</span>
-          </button>
-        </motion.div>
       </motion.div>
 
        <motion.div

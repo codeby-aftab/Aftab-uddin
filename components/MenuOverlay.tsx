@@ -1,8 +1,8 @@
 import React from 'react';
 // FIX: Import Variants from framer-motion to correctly type animation variants.
 import { motion, Variants } from 'framer-motion';
-import { ArrowLeftIcon } from './icons/Icons';
-import { OVERLAY_NAV_LINKS, BRIEF_US_INFO, OFFICE_INFO, OVERLAY_SOCIAL_LINKS } from '../constants';
+import { ArrowLeftIcon, Logo } from './icons/Icons';
+import { OVERLAY_NAV_LINKS, BRIEF_US_INFO, OVERLAY_SOCIAL_LINKS } from '../constants';
 
 interface MenuOverlayProps {
   onClose: () => void;
@@ -61,13 +61,13 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ onClose, onNavClick })
       </button>
 
       {/* Left Column */}
-      <div className="w-full lg:w-3/5 bg-off-white flex flex-col justify-center items-center p-8">
+      <div className="w-full lg:w-3/5 bg-off-white flex flex-col justify-center items-start p-8 pl-12 md:pl-24">
         <nav>
-          <ul className="text-center">
+          <ul>
             {OVERLAY_NAV_LINKS.map((link, i) => (
               <motion.li 
                 key={link.name} 
-                className="my-4"
+                className="my-5"
                 custom={i}
                 variants={navItemVariants}
                 initial="hidden"
@@ -76,7 +76,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ onClose, onNavClick })
               >
                 <button
                   onClick={() => onNavClick(link.href)}
-                  className="text-4xl md:text-6xl font-light text-gray-600 hover:text-gray-900 transition-all duration-300"
+                  className="text-5xl md:text-7xl font-medium tracking-tight text-gray-500 hover:text-gray-900 transition-all duration-300 transform hover:translate-x-4"
                   data-cursor-hover
                 >
                   {link.name}
@@ -100,32 +100,33 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ onClose, onNavClick })
           <ArrowLeftIcon />
         </button>
 
-        <div className="space-y-12">
-          <div>
-            <h3 className="text-xl font-semibold mb-4 text-gray-900">Brief Us</h3>
-            <a href={`mailto:${BRIEF_US_INFO.email}`} className="block text-gray-600 hover:text-gray-900 transition-colors" data-cursor-hover>{BRIEF_US_INFO.email}</a>
-            <a href={`tel:${BRIEF_US_INFO.tel.replace(/\s/g, '')}`} className="block text-gray-600 hover:text-gray-900 transition-colors mt-2" data-cursor-hover>{BRIEF_US_INFO.tel}</a>
+        <div>
+          <div className="flex justify-center mb-12">
+            <Logo className="w-48 h-48 text-gray-800" />
           </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4 text-gray-900">Our Office</h3>
-            <p className="text-gray-600 max-w-xs">{OFFICE_INFO.address}</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4 text-gray-900">Follow us</h3>
-            <div className="flex space-x-6">
-              {OVERLAY_SOCIAL_LINKS.map(link => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-900 transition-transform hover:scale-110"
-                  aria-label={link.name}
-                  data-cursor-hover
-                >
-                  <link.icon />
-                </a>
-              ))}
+          <div className="space-y-12">
+            <div>
+              <h3 className="text-xl font-semibold mb-4 text-gray-900">Brief Us</h3>
+              <a href={`mailto:${BRIEF_US_INFO.email}`} className="block text-gray-600 hover:text-gray-900 transition-colors" data-cursor-hover>{BRIEF_US_INFO.email}</a>
+              <a href={`tel:${BRIEF_US_INFO.tel.replace(/\s/g, '')}`} className="block text-gray-600 hover:text-gray-900 transition-colors mt-2" data-cursor-hover>{BRIEF_US_INFO.tel}</a>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-4 text-gray-900">Follow us</h3>
+              <div className="flex space-x-6">
+                {OVERLAY_SOCIAL_LINKS.map(link => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-gray-900 transition-transform hover:scale-110"
+                    aria-label={link.name}
+                    data-cursor-hover
+                  >
+                    <link.icon />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
