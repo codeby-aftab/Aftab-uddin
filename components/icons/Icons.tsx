@@ -193,7 +193,7 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ className }) => (
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className || "w-12 h-12 text-gray-900"} aria-label="AJ Logo">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className || "w-14 h-14 text-gray-900"} aria-label="AJ Logo">
         <path d="M22 75L40 25L58 75H48L40 50L32 75H22Z M62 75V25H82V35H72V65C72 75 65 75 62 70V75Z" fill="currentColor" />
     </svg>
 );
