@@ -16,3 +16,10 @@ export interface Skill {
   name: string;
   icon: React.ReactNode;
 }
+
+export interface TimelineEvent {
+  date: string;
+  title: string;
+  subtitle: string;
+  description: string;
+}

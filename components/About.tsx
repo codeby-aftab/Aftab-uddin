@@ -1,10 +1,10 @@
 import React from 'react';
 import { SKILLS } from '../constants';
 import { DownloadIcon } from './icons/Icons';
-// FIX: Import Variants type from framer-motion to resolve typing errors.
+// FIX: Import Variants from framer-motion to correctly type animation variants.
 import { motion, Variants } from 'framer-motion';
 
-// FIX: Add Variants type to ensure correct type inference for animation properties.
+// FIX: Explicitly type variants for type safety.
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -13,25 +13,18 @@ const containerVariants: Variants = {
   },
 };
 
-// FIX: Add Variants type to ensure correct type inference for animation properties.
+const gridContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.05 },
+  },
+}
+
+// FIX: Explicitly type variants to resolve type error with 'ease' property.
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
-
-// FIX: Add Variants type to ensure correct type inference for animation properties.
-const marqueeVariants: Variants = {
-  animate: {
-    x: [0, -1035],
-    transition: {
-      x: {
-        repeat: Infinity,
-        repeatType: "loop",
-        duration: 20,
-        ease: "linear",
-      },
-    },
-  },
 };
 
 export const About: React.FC = () => {
@@ -52,16 +45,22 @@ export const About: React.FC = () => {
           </motion.p>
           <motion.div variants={itemVariants} className="mb-8">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">My Skills</h3>
-             <div className="relative w-full overflow-hidden py-4 bg-gray-100 rounded-lg">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-transparent to-gray-100 z-10"></div>
-                <motion.div className="flex" variants={marqueeVariants} animate="animate">
-                  {[...SKILLS, ...SKILLS].map((skill, index) => (
-                      <span key={index} className="text-md font-semibold text-gray-600 mx-4 flex-shrink-0">
-                        {skill}
-                      </span>
-                  ))}
+            <motion.div 
+              className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 text-center"
+              variants={gridContainerVariants}
+            >
+              {SKILLS.map((skill) => (
+                <motion.div
+                  key={skill.name}
+                  variants={itemVariants}
+                  className="group flex flex-col items-center justify-center p-4 bg-gray-100/80 rounded-lg transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1"
+                  title={skill.name}
+                >
+                  <skill.icon />
+                  <span className="mt-2 text-xs sm:text-sm font-medium text-gray-700">{skill.name}</span>
                 </motion.div>
-             </div>
+              ))}
+            </motion.div>
           </motion.div>
           <motion.a
             variants={itemVariants}

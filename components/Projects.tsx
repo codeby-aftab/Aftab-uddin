@@ -2,11 +2,9 @@ import React from 'react';
 import { Project } from '../types';
 import { ProjectCard, cardVariants } from './ProjectCard';
 import { ArrowUpRightIcon } from './icons/Icons';
-// FIX: Import Variants type from framer-motion to resolve typing errors.
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-// FIX: Add Variants type to ensure correct type inference for animation properties.
-const containerVariants: Variants = {
+const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -20,9 +18,10 @@ const containerVariants: Variants = {
 interface ProjectsProps {
   projects: Project[];
   onProjectSelect: (project: Project) => void;
+  onOpenAllProjects: () => void;
 }
 
-export const Projects: React.FC<ProjectsProps> = ({ projects, onProjectSelect }) => {
+export const Projects: React.FC<ProjectsProps> = ({ projects, onProjectSelect, onOpenAllProjects }) => {
   return (
     <motion.section
       id="projects"
@@ -39,8 +38,8 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onProjectSelect })
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} onSelect={() => onProjectSelect(project)} />
         ))}
-        <motion.a
-          href="#"
+        <motion.div
+          onClick={onOpenAllProjects}
           className="group relative rounded-lg bg-gray-900 h-80 cursor-pointer flex flex-col justify-center items-center text-center p-6 text-white overflow-hidden shadow-lg"
           variants={cardVariants}
           data-cursor-hover
@@ -51,7 +50,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onProjectSelect })
            <div className="absolute top-4 right-4 p-3 bg-white/10 backdrop-blur-sm rounded-full transform transition-transform duration-300 group-hover:scale-110">
             <ArrowUpRightIcon />
           </div>
-        </motion.a>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

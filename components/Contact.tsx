@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { SOCIAL_LINKS } from '../constants';
 import { SendIcon } from './icons/Icons';
+// FIX: Import Variants from framer-motion to correctly type animation variants.
 import { motion, Variants } from 'framer-motion';
+import { Footer } from './Footer';
 
 interface FormData {
     name: string;
@@ -15,6 +17,7 @@ interface FormErrors {
     message?: string;
 }
 
+// FIX: Explicitly type variants to resolve type error with 'ease' property.
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -179,6 +182,7 @@ export const Contact: React.FC = () => {
                 </div>
               </div>
             </motion.div>
+            <Footer />
         </motion.section>
     );
 };

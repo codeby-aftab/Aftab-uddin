@@ -29,14 +29,12 @@
       }
     </script>
     <style>
-      body.gradient-bg {
-        background: linear-gradient(-45deg, #a8e6cf, #dcedc1, #ffd3b6, #ffaaa5);
-        background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
+      body.dynamic-bg {
         position: relative;
+        transition: background-color 0.8s ease-in-out;
       }
 
-      body.gradient-bg::before {
+      body.dynamic-bg::before {
         content: '';
         position: fixed;
         top: 0;
@@ -45,13 +43,25 @@
         bottom: 0;
         background-color: rgba(248, 247, 244, 0.9);
         z-index: -1;
-        transition: background-color 0.3s ease;
       }
 
-      @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      body[data-active-section="home"] {
+          background-color: #E0F2FE;
+      }
+      body[data-active-section="projects"] {
+          background-color: #a8e6cf;
+      }
+      body[data-active-section="services"] {
+          background-color: #dcedc1;
+      }
+      body[data-active-section="about"] {
+          background-color: #ffd3b6;
+      }
+      body[data-active-section="experience"] {
+          background-color: #FEF9C3;
+      }
+      body[data-active-section="contact"] {
+          background-color: #ffaaa5;
       }
       
       /* Hide default cursor */
@@ -81,7 +91,7 @@
 }
 </script>
 </head>
-  <body class="gradient-bg bg-transparent text-gray-800 font-sans antialiased">
+  <body class="dynamic-bg bg-transparent text-gray-800 font-sans antialiased">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

@@ -68,8 +68,8 @@ export const CustomCursor: React.FC = () => {
             <motion.div
                 className="fixed w-8 h-8 border-2 rounded-full pointer-events-none z-[9999]"
                 style={{
-                    translateX: cursorTextXSpring,
-                    translateY: cursorTextYSpring,
+                    x: cursorTextXSpring,
+                    y: cursorTextYSpring,
                 }}
                 variants={variants}
                 animate={isHovering ? "hover" : "default"}
@@ -77,8 +77,8 @@ export const CustomCursor: React.FC = () => {
             <motion.div
                 className="fixed w-2 h-2 rounded-full pointer-events-none z-[9999]"
                 style={{
-                    translateX: cursorXSpring,
-                    translateY: cursorYSpring,
+                    x: cursorXSpring,
+                    y: cursorYSpring,
                 }}
                 variants={variants}
                 animate={isHovering ? "hover" : "default"}

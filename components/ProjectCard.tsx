@@ -1,7 +1,7 @@
 import React from 'react';
 import { Project } from '../types';
 import { ArrowUpRightIcon } from './icons/Icons';
-// FIX: Import Variants type from framer-motion to resolve typing errors.
+// FIX: Import Variants from framer-motion to correctly type animation variants.
 import { motion, Variants } from 'framer-motion';
 
 interface ProjectCardProps {
@@ -9,10 +9,11 @@ interface ProjectCardProps {
   onSelect: () => void;
 }
 
-// FIX: Add Variants type to ensure correct type inference for animation properties.
+// FIX: Explicitly type variants to resolve type error with 'type' property.
+// RENAMED: Variants renamed to 'hidden'/'visible' for broader compatibility.
 export const cardVariants: Variants = {
-    offscreen: { y: 50, opacity: 0 },
-    onscreen: {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
         y: 0,
         opacity: 1,
         transition: {
@@ -26,7 +27,7 @@ export const cardVariants: Variants = {
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) => {
   return (
     <motion.div
-      className="relative rounded-lg overflow-hidden shadow-lg h-80 cursor-pointer"
+      className="group relative rounded-lg overflow-hidden shadow-lg h-80 cursor-pointer"
       onClick={onSelect}
       variants={cardVariants}
       data-cursor-hover

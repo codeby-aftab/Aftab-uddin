@@ -1,7 +1,9 @@
 import React from 'react';
 import { SERVICES } from '../constants';
+// FIX: Import Variants from framer-motion to correctly type animation variants.
 import { motion, Variants } from 'framer-motion';
 
+// FIX: Explicitly type variants for type safety.
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -10,6 +12,7 @@ const containerVariants: Variants = {
   },
 };
 
+// FIX: Explicitly type variants to resolve type error with 'ease' property.
 const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
