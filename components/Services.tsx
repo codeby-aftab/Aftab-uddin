@@ -32,9 +32,9 @@ export const Services: React.FC = () => {
       viewport={{ once: true, amount: 0.1 }}
       variants={containerVariants}
     >
-      <motion.div className="mb-16" variants={itemVariants}>
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900">What I Do</h2>
-        <p className="text-lg text-gray-600 mt-2">I offer a range of services to bring your digital ideas to life.</p>
+      <motion.div className="mb-16" variants={containerVariants}>
+        <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-gray-900">What I Do</motion.h2>
+        <motion.p variants={itemVariants} className="text-lg text-gray-600 mt-2">I offer a range of services to bring your digital ideas to life.</motion.p>
       </motion.div>
       <motion.div 
         className="grid grid-cols-1 md:grid-cols-2 gap-8"

@@ -58,42 +58,40 @@ export const Experience: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <div>
-        <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-gray-900 mb-16">
-          My Journey
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
-          <motion.div variants={containerVariants}>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-8 relative">
-              Work Experience
-            </h3>
-            <ul className="relative">
-              {EXPERIENCE.map((item, index) => (
-                <TimelineItem 
-                  key={index} 
-                  item={item} 
-                  icon={<BriefcaseIcon className="w-8 h-8" />} 
-                  isLast={index === EXPERIENCE.length - 1} 
-                />
-              ))}
-            </ul>
-          </motion.div>
-          <motion.div variants={containerVariants}>
-            <h3 className="text-2xl font-semibold text-gray-800 mb-8 relative">
-              Education
-            </h3>
-             <ul className="relative">
-              {EDUCATION.map((item, index) => (
-                <TimelineItem 
-                  key={index} 
-                  item={item} 
-                  icon={<AcademicCapIcon className="w-8 h-8" />}
-                  isLast={index === EDUCATION.length - 1} 
-                />
-              ))}
-            </ul>
-          </motion.div>
-        </div>
+      <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-gray-900 mb-16">
+        My Journey
+      </motion.h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+        <motion.div variants={containerVariants}>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-8 relative">
+            Work Experience
+          </h3>
+          <ul className="relative">
+            {EXPERIENCE.map((item, index) => (
+              <TimelineItem 
+                key={index} 
+                item={item} 
+                icon={<BriefcaseIcon className="w-8 h-8" />} 
+                isLast={index === EXPERIENCE.length - 1} 
+              />
+            ))}
+          </ul>
+        </motion.div>
+        <motion.div variants={containerVariants}>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-8 relative">
+            Education
+          </h3>
+           <ul className="relative">
+            {EDUCATION.map((item, index) => (
+              <TimelineItem 
+                key={index} 
+                item={item} 
+                icon={<AcademicCapIcon className="w-8 h-8" />}
+                isLast={index === EDUCATION.length - 1} 
+              />
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </motion.section>
   );
