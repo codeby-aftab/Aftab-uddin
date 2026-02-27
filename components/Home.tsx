@@ -33,7 +33,7 @@ export const Home: React.FC = () => {
   return (
     <motion.section
       id="home"
-      className="relative py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:items-center lg:snap-start"
+      className="relative py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:items-center lg:snap-start px-6 md:px-12 lg:px-20"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"

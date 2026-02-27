@@ -25,7 +25,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onProjectSelect, o
   return (
     <motion.section
       id="projects"
-      className="pt-20 lg:pt-0 pb-20 lg:pb-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start"
+      className="pt-20 lg:pt-0 pb-20 lg:pb-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start px-6 md:px-12 lg:px-20"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}

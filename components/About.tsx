@@ -31,19 +31,19 @@ export const About: React.FC = () => {
   return (
     <motion.section
       id="about"
-      className="py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start"
+      className="py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start px-6 md:px-12 lg:px-20"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <motion.div variants={containerVariants}>
-        <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Me</motion.h2>
-        <motion.p variants={itemVariants} className="text-lg text-gray-600 mb-8 leading-relaxed max-w-4xl">
+      <motion.div variants={containerVariants} className="max-w-4xl">
+        <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Me</motion.h2>
+        <motion.p variants={itemVariants} className="text-base text-gray-600 mb-8 leading-relaxed">
           I'm a Computer Science student with a strong interest in Web Development and Software Engineering. Proficient in building full-stack web applications using the MERN stack and managing custom WordPress websites. I enjoy solving technical problems, learning new technologies, and contributing to dynamic teams. My experience ranges from developing scalable, responsive, and secure applications to cybersecurity and vulnerability assessments. My goal is to grow as a Full-Stack Web Developer while leveraging my security expertise.
         </motion.p>
         <motion.div variants={itemVariants} className="mb-8">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">My Skills</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">My Skills</h3>
           <motion.div 
             className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 text-center"
             variants={gridContainerVariants}

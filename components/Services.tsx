@@ -26,31 +26,31 @@ export const Services: React.FC = () => {
   return (
     <motion.section
       id="services"
-      className="py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start"
+      className="py-20 lg:py-0 lg:h-screen lg:flex lg:flex-col lg:justify-center lg:snap-start px-6 md:px-12 lg:px-20"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
       variants={containerVariants}
     >
-      <motion.div className="mb-16" variants={containerVariants}>
-        <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-gray-900">What I Do</motion.h2>
-        <motion.p variants={itemVariants} className="text-lg text-gray-600 mt-2">I offer a range of services to bring your digital ideas to life.</motion.p>
+      <motion.div className="mb-12 max-w-4xl" variants={containerVariants}>
+        <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-gray-900">What I Do</motion.h2>
+        <motion.p variants={itemVariants} className="text-base text-gray-600 mt-2">I offer a range of services to bring your digital ideas to life.</motion.p>
       </motion.div>
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl"
         variants={containerVariants}
       >
         {SERVICES.map((service, index) => (
           <motion.div 
             key={index} 
-            className="bg-off-white/50 backdrop-blur-md rounded-lg p-6 flex flex-col items-start shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            className="bg-off-white/50 backdrop-blur-md rounded-lg p-5 flex flex-col items-start shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             variants={itemVariants}
           >
-            <div className="bg-accent/10 p-3 rounded-full mb-4">
+            <div className="bg-accent/10 p-2.5 rounded-full mb-3">
                 <service.icon />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-            <p className="text-gray-600 leading-relaxed">{service.description}</p>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">{service.title}</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">{service.description}</p>
           </motion.div>
         ))}
       </motion.div>
