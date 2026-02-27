@@ -210,10 +210,10 @@ export const EDUCATION: TimelineEvent[] = [
     description: 'Focused on software engineering, web development, and database management. Completed several projects including a final year project on an LLM-integrated MERN stack application.'
   },
   {
-    date: '2018 - 2020',
-    title: 'Intermediate in Pre-Engineering',
-    subtitle: 'Govt. Dehli College',
-    description: 'Completed higher secondary education with a focus on mathematics, physics, and chemistry, building a strong foundation for a technical degree.'
+    date: '2024',
+    title: 'Cybersecurity Course',
+    subtitle: 'Ashre Tech, NASTAP',
+    description: 'Completed an intensive cybersecurity training program covering network security, ethical hacking, and threat analysis, enhancing my skills as a SOC Analyst.'
   },
 ];
 
