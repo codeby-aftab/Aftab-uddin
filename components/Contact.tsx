@@ -1,9 +1,10 @@
+
 import React, { useState } from 'react';
-import { SOCIAL_LINKS } from '../constants';
-import { SendIcon } from './icons/Icons';
-// FIX: Import Variants from framer-motion to correctly type animation variants.
-import { motion, Variants } from 'framer-motion';
+import { SOCIAL_LINKS, CONTACT_DETAILS } from '../constants';
+import { SendIcon, SparklesIcon } from './icons/Icons';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { Footer } from './Footer';
+import { GoogleGenAI } from "@google/genai";
 
 interface FormData {
     name: string;
@@ -17,7 +18,6 @@ interface FormErrors {
     message?: string;
 }
 
-// FIX: Explicitly type variants to resolve type error with 'ease' property.
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -35,7 +35,7 @@ export const Contact: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
     const [errors, setErrors] = useState<FormErrors>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
-
+    const [isRefining, setIsRefining] = useState(false);
 
     const validate = (): FormErrors => {
         const newErrors: FormErrors = {};
@@ -49,6 +49,30 @@ export const Contact: React.FC = () => {
         return newErrors;
     };
 
+    const handleRefine = async () => {
+        if (!formData.message.trim()) return;
+        
+        setIsRefining(true);
+        try {
+            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+            const response = await ai.models.generateContent({
+                model: 'gemini-3-flash-preview',
+                contents: `Refine the following message for a professional portfolio contact form. Make it concise, professional, and clear while maintaining the original intent: "${formData.message}"`,
+                config: {
+                    systemInstruction: "You are a professional communication expert. Return ONLY the refined message text, no explanations or additional context.",
+                }
+            });
+            
+            const refinedText = response.text?.trim();
+            if (refinedText) {
+                setFormData(prev => ({ ...prev, message: refinedText }));
+            }
+        } catch (error) {
+            console.error("Failed to refine message:", error);
+        } finally {
+            setIsRefining(false);
+        }
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -60,13 +84,17 @@ export const Contact: React.FC = () => {
         }
     };
 
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const validationErrors = validate();
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
+            // Functional implementation: Open user's mail client
+            const subject = encodeURIComponent(`Inquiry from ${formData.name}`);
+            const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+            window.location.href = `mailto:${CONTACT_DETAILS.email}?subject=${subject}&body=${body}`;
+            
             setIsSubmitted(true);
             setTimeout(() => {
                 setFormData({ name: '', email: '', message: '' });
@@ -122,7 +150,7 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div className="lg:col-span-3">
-                  <form onSubmit={handleSubmit} className="space-y-8" noValidate>
+                  <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                       <div className="relative">
                           <input
                               type="text"
@@ -148,7 +176,6 @@ export const Contact: React.FC = () => {
                               required
                               className={getInputClasses('email')}
                               placeholder="Email Address"
-                              data-cursor-text
                           />
                           <label htmlFor="email" className={`absolute left-4 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm ${errors.email ? 'text-red-600' : ''}`}>Email Address</label>
                           {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
@@ -163,20 +190,30 @@ export const Contact: React.FC = () => {
                               required
                               className={getInputClasses('message')}
                               placeholder="Your Message"
-                              data-cursor-text
                           />
                           <label htmlFor="message" className={`absolute left-4 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm ${errors.message ? 'text-red-600' : ''}`}>Your Message</label>
                           {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}
                       </div>
-                      <div>
-                          <button
-                              type="submit"
-                              className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-accent hover:bg-accent-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all transform hover:scale-105"
-                              data-cursor-hover
-                          >
-                            <SendIcon />
-                            {isSubmitted ? 'Message Sent!' : 'Send Message'}
-                          </button>
+                      
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button
+                            type="button"
+                            onClick={handleRefine}
+                            disabled={isRefining || !formData.message}
+                            className={`flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 border border-gray-900/20 rounded-md shadow-sm text-sm font-semibold text-gray-900 bg-white hover:bg-gray-50 transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100`}
+                            data-cursor-hover
+                        >
+                          <SparklesIcon />
+                          {isRefining ? 'Refining...' : 'Refine with AI'}
+                        </button>
+                        <button
+                            type="submit"
+                            className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-accent hover:bg-accent-light focus:outline-none transition-all transform hover:scale-[1.02]"
+                            data-cursor-hover
+                        >
+                          <SendIcon />
+                          {isSubmitted ? 'Mail Client Opened!' : 'Send Message'}
+                        </button>
                       </div>
                   </form>
                 </div>

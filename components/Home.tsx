@@ -42,7 +42,7 @@ export const Home: React.FC = () => {
       <motion.div variants={containerVariants} className="max-w-4xl text-center flex flex-col items-center">
         <motion.h1
           variants={containerVariants}
-          className="text-5xl sm:text-7xl md:text-8xl font-black text-gray-900 tracking-tighter mb-6"
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-7xl xl:text-8xl font-black text-gray-900 tracking-tighter mb-6 leading-[0.9]"
         >
           <motion.span variants={itemVariants} className="block">Full-Stack Developer</motion.span>
           <motion.span 

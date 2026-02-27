@@ -91,6 +91,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 key={page}
                 src={images[imageIndex]}
                 alt={`${project.title} screenshot ${imageIndex + 1}`}
+                referrerPolicy="no-referrer"
                 custom={direction}
                 variants={carouselVariants}
                 initial="enter"

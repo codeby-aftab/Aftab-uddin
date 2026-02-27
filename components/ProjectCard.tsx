@@ -35,6 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
       <motion.img 
         src={project.imageUrl} 
         alt={project.title} 
+        referrerPolicy="no-referrer"
         className="absolute inset-0 w-full h-full object-cover"
         whileHover={{ scale: 1.05 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
