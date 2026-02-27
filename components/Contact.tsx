@@ -1,10 +1,9 @@
 
 import React, { useState } from 'react';
 import { SOCIAL_LINKS, CONTACT_DETAILS } from '../constants';
-import { SendIcon, SparklesIcon } from './icons/Icons';
+import { SendIcon } from './icons/Icons';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { Footer } from './Footer';
-import { GoogleGenAI } from "@google/genai";
 
 interface FormData {
     name: string;
@@ -35,7 +34,6 @@ export const Contact: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
     const [errors, setErrors] = useState<FormErrors>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [isRefining, setIsRefining] = useState(false);
 
     const validate = (): FormErrors => {
         const newErrors: FormErrors = {};
@@ -47,31 +45,6 @@ export const Contact: React.FC = () => {
         }
         if (!formData.message.trim()) newErrors.message = 'Message is required.';
         return newErrors;
-    };
-
-    const handleRefine = async () => {
-        if (!formData.message.trim()) return;
-        
-        setIsRefining(true);
-        try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-            const response = await ai.models.generateContent({
-                model: 'gemini-3-flash-preview',
-                contents: `Refine the following message for a professional portfolio contact form. Make it concise, professional, and clear while maintaining the original intent: "${formData.message}"`,
-                config: {
-                    systemInstruction: "You are a professional communication expert. Return ONLY the refined message text, no explanations or additional context.",
-                }
-            });
-            
-            const refinedText = response.text?.trim();
-            if (refinedText) {
-                setFormData(prev => ({ ...prev, message: refinedText }));
-            }
-        } catch (error) {
-            console.error("Failed to refine message:", error);
-        } finally {
-            setIsRefining(false);
-        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -195,20 +168,10 @@ export const Contact: React.FC = () => {
                           {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}
                       </div>
                       
-                      <div className="flex flex-col sm:flex-row gap-4">
-                        <button
-                            type="button"
-                            onClick={handleRefine}
-                            disabled={isRefining || !formData.message}
-                            className={`flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 border border-gray-900/20 rounded-md shadow-sm text-sm font-semibold text-gray-900 bg-white hover:bg-gray-50 transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100`}
-                            data-cursor-hover
-                        >
-                          <SparklesIcon />
-                          {isRefining ? 'Refining...' : 'Refine with AI'}
-                        </button>
+                      <div className="flex">
                         <button
                             type="submit"
-                            className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-accent hover:bg-accent-light focus:outline-none transition-all transform hover:scale-[1.02]"
+                            className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-accent hover:bg-accent-light focus:outline-none transition-all transform hover:scale-[1.02]"
                             data-cursor-hover
                         >
                           <SendIcon />
