@@ -77,8 +77,8 @@ export const Contact: React.FC = () => {
     };
 
     const getInputClasses = (fieldName: keyof FormData) => {
-        const baseClasses = "peer block w-full px-4 py-3 bg-off-white/70 border border-gray-900/10 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder-transparent transition-colors";
-        const focusClasses = "focus:border-accent";
+        const baseClasses = "peer block w-full px-4 py-3 bg-off-white/70 border border-gray-900/10 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder-transparent transition-all duration-200";
+        const focusClasses = "focus:border-accent focus:bg-white";
         if (errors[fieldName]) {
             return `${baseClasses} border-red-500`;
         }
@@ -109,7 +109,7 @@ export const Contact: React.FC = () => {
                           <motion.a 
                               key={link.name} 
                               href={link.href} 
-                              className="text-gray-500 hover:text-accent transition-colors" 
+                              className="text-gray-500 hover:text-accent transition-colors duration-200" 
                               aria-label={`${link.name} Profile`}
                               whileHover={{ y: -4 }}
                               transition={{ type: 'spring', stiffness: 300 }}
@@ -136,7 +136,7 @@ export const Contact: React.FC = () => {
                               placeholder="Name"
                               data-cursor-text
                           />
-                          <label htmlFor="name" className={`absolute left-4 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm ${errors.name ? 'text-red-600' : ''}`}>Name</label>
+                          <label htmlFor="name" className={`absolute left-4 -top-5 text-xs font-semibold text-gray-600 transition-all duration-200 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-xs peer-focus:font-semibold ${errors.name ? 'text-red-600' : ''}`}>Name</label>
                           {errors.name && <p className="mt-2 text-sm text-red-600">{errors.name}</p>}
                       </div>
                       <div className="relative">
@@ -150,7 +150,7 @@ export const Contact: React.FC = () => {
                               className={getInputClasses('email')}
                               placeholder="Email Address"
                           />
-                          <label htmlFor="email" className={`absolute left-4 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm ${errors.email ? 'text-red-600' : ''}`}>Email Address</label>
+                          <label htmlFor="email" className={`absolute left-4 -top-5 text-xs font-semibold text-gray-600 transition-all duration-200 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-xs peer-focus:font-semibold ${errors.email ? 'text-red-600' : ''}`}>Email Address</label>
                           {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
                       </div>
                       <div className="relative">
@@ -164,14 +164,14 @@ export const Contact: React.FC = () => {
                               className={getInputClasses('message')}
                               placeholder="Your Message"
                           />
-                          <label htmlFor="message" className={`absolute left-4 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm ${errors.message ? 'text-red-600' : ''}`}>Your Message</label>
+                          <label htmlFor="message" className={`absolute left-4 -top-5 text-xs font-semibold text-gray-600 transition-all duration-200 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3.5 peer-focus:-top-5 peer-focus:text-gray-600 peer-focus:text-xs peer-focus:font-semibold ${errors.message ? 'text-red-600' : ''}`}>Your Message</label>
                           {errors.message && <p className="mt-2 text-sm text-red-600">{errors.message}</p>}
                       </div>
                       
                       <div className="flex">
                         <button
                             type="submit"
-                            className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-accent hover:bg-accent-light focus:outline-none transition-all transform hover:scale-[1.02]"
+                            className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-md shadow-md text-sm font-bold text-white bg-gray-900 hover:bg-gray-800 active:scale-95 transition-all duration-200"
                             data-cursor-hover
                         >
                           <SendIcon />
